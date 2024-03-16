@@ -1,0 +1,199 @@
+<html>
+<head>
+	<style>
+		@page {
+		  size: Letter; /* Change from the default size of A4 */
+		  margin: 0.5in; /* Set margin on each page */
+		}
+		h1 {
+			text-align: center;
+			font-size: 1.5rem;
+		}
+		h2 {
+			font-size: 1rem;
+		}
+		p {
+			margin-top: 0.3rem;
+			margin-bottom: 0.3rem;
+		}
+		input {
+			border: 0;
+			border-bottom: 1px solid black;
+			margin-top: 0.5rem;
+		}
+		input.name-input.long {
+			width: 20em;
+		}
+		input.name-input {
+			width: 10em;
+		}
+		input.amount-input {
+			width: 5em;
+		}
+		input.phone-input {
+			width: 15em;
+		}
+		input.phone-input-long {
+			width: 40em;
+		}
+		input.email-input {
+			width: 40em;
+		}
+		section {
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+		}
+		table, thead, tbody, th, tr, td {
+			border: 0px;
+		}
+		.w-100 {
+			width: 100%;
+		}
+		.text-16 * {
+			font-size: 1rem;
+		}
+		.text-12 * {
+			font-size: 0.75rem;
+		}
+		.text-11, .text-11 * {
+			font-size: 0.69rem;
+		}
+		.text-10, .text-10 * {
+			font-size: 0.63rem;
+		}
+		.text-9, .text-9 * {
+			font-size: 0.56rem;
+		}
+		.text-8 * {
+			font-size: 0.5rem;
+		}
+		.text-center {
+			text-align: center;
+		}
+		.nowrap {
+			white-space: nowrap;
+		}
+		.new-page {
+			page-break-before: always;
+		}
+		#image-header {
+			display: flex;
+			justify-content: center;
+		}
+		#image-header img {
+			height: 8rem; 
+			margin-left: 1rem;
+			margin-right: 1rem;
+		}
+	</style>
+</head>
+<body>
+	<div id="image-header">
+		<img src="https://images.dnr.state.mn.us/destinations/state_parks/1_large/SPK00280_002.jpg" />
+		<img src="https://images.dnr.state.mn.us/destinations/state_parks/1_large/SPK00280_001.jpg" />
+		<img src="https://images.dnr.state.mn.us/destinations/state_parks/banners/spk00280.jpg" />
+	</div>
+	<main>
+		<h1>Whitewater State Park Camping 04/12 - 04/14</h1>
+		<form>
+			<section id="intro-section" class="text-11">
+				<p>I hereby grant permission for my son(s), <input name="scout-names" type="text" class="name-input long">, to participate in the <strong>04/12/24-04/14/24</strong> Hiking/Camping weekend at <strong>Whitewater State Park</strong> under the leadership of Troop ***REMOVED***.</p>
+				<p>The troop will be <strong>tent camping at a group camp site (GC2)</strong>. The scouts will be cooking the meals, so bring your mess kits!</p>
+				<p>Here is the website - <a href="http://www.dnr.state.mn.us/state_parks/whitewater/index.html">http://www.dnr.state.mn.us/state_parks/whitewater/index.html</a></p>
+			</section>
+			<section id="times-section" class="text-12">
+				<p><strong>Departing Location and Time: ***REMOVED*** @ 5:15 p.m. (Friday – 4/12/23)</strong></p>
+				<p><strong>Returning Location and Time: ***REMOVED*** @ 12:00 p.m. (Sunday – 4/14/23)</strong></p>
+			</section>
+			<section id="payment-section" class="text-10">
+				<table class="w-100">
+					<thead>
+						<th><strong>Cost per participant: $45.00</strong> (SM &amp; ASMs – no charge)</th>
+						<th colspan="2">Method of payment for camping (circle one):</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Scout’s name: <input name="scout-name-1" class="name-input" type="text"></td>
+							<td>cash check camp fund</td>
+							<td>Amount: $<input class="amount-input" type="text"></td>
+						</tr>
+						<tr>
+							<td>Scout’s name: <input name="scout-name-1" class="name-input" type="text"></td>
+							<td>cash check camp fund</td>
+							<td>Amount: $<input class="amount-input" type="text"></td>
+						</tr>
+						<tr>
+							<td>Adult’s name: <input name="scout-name-1" class="name-input" type="text"></td>
+							<td>cash check camp fund</td>
+							<td>Amount: $<input class="amount-input" type="text"></td>
+						</tr>
+						<tr>
+							<td>Adult’s name: <input name="scout-name-1" class="name-input" type="text"></td>
+							<td>cash check camp fund</td>
+							<td>Amount: $<input class="amount-input" type="text"></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section id="driver-section" class="text-9">
+				<p><strong><input type="checkbox"> parent will drive and attend - able to transport <input class="amount-input" type="number"> scouts <input type="checkbox"> I am able to pull a trailer <input type="checkbox"> backup driver</strong></p>
+			</section>
+
+			<section id="mailto-info" class="text-center">
+				<p class="text-12">Mail completed form and payment (payable to Troop ***REMOVED***) to:</p>
+				<p class="text-12">***REMOVED*** ***REMOVED*** – ***REMOVED*** ***REMOVED*** Ave., ***REMOVED***, ***REMOVED*** ***REMOVED***</p>
+				<p class="text-11">Questions - (***REMOVED***) ***REMOVED***-***REMOVED*** or ***REMOVED***@***REMOVED***</p>
+			</section>
+
+			<section id="medical-note-section" class="text-9">
+				<p><strong>Please note any special medical considerations or restrictions in your son’s activities on the <u>BACK</u> of this form.</strong></p>
+			</section>
+
+			<section id="contact-section" class="text-10">
+				<h2>Emergency Contacts:</h2>
+				<table class="w-100">
+					<tr>
+						<td><input id="primary-contact-name-1" class="name-input"/></td>
+						<td><input id="primary-contact-phone-1" class="phone-input"/></td>
+						<td><input id="primary-contact-email-1" class="email-input"/></td>
+					</tr>
+					<tr>
+						<td><label for="primary-contact-name-1">Name:</label></td>
+						<td><label for="primary-contact-phone-1">Phone:</label></td>
+						<td><label for="primary-contact-email-1">Email:</label></td>
+					</tr>
+					<tr>
+						<td><input id="primary-contact-name-2" class="name-input"/></td>
+						<td><input id="primary-contact-phone-2" class="phone-input"/></td>
+						<td><input id="primary-contact-email-2" class="email-input"/></td>
+					</tr>
+					<tr>
+						<td><label for="primary-contact-name-2">Name:</label></td>
+						<td><label for="primary-contact-phone-2">Phone:</label></td>
+						<td><label for="primary-contact-email-2">Email:</label></td>
+					</tr>
+				</table>
+				<table class="w-100">
+					<tr><td colspan="2"><input type="text" class="w-100"></td></tr>
+					<tr><td>Parent or Guardian Signature</td><td>Date</td></tr>
+				</table>
+			</section>
+
+			<section id="permission-statement">
+				<p class="text-9"><strong>In consideration of his engaging in this activity:</strong> My son(s) has my permission to engage in all prescribed activities, except as noted by me on the back of this form. In case of an emergency, I understand every effort will be made to contact me. In the event that I cannot be reached, I hereby give my permission to the physician selected by an adult leader in charge of the activity to secure proper medical treatment, including hospitalization, anesthesia, surgery, or injections of medications for my son. I have specified any special considerations for my son (allergies, prescribed medications, etc.) which may affect his treatment on the back of this form. I agree to save harmless the said leaders and their associates, our unit’s sponsoring organization, and the Boy Scouts of America because of any claim arising on behalf of my son from possible injury or illness while engaged in this activity.</p>
+			</section>
+		</form>
+	<main>
+
+	<p class="new-page"><strong>PARENTS – FOR YOUR REFERENCE</strong></p>
+	<p><strong>Where</strong>: Whitewater State Park – 19041 Hwy 74, Altura, ***REMOVED*** 55***REMOVED*** 507-932-3007</p>
+	<p><strong>When</strong>: Friday, 4/12 5:15pm – Sunday, 4/14 12:00pm</p>
+	<p><strong>Time</strong>: <u>Leave GLC parking lot at 5:15 p.m.</u></p>
+	<p><strong>Return</strong>: Parents pick up on Sunday, 4/14 at 12:00p.m. – GLC parking lot</p>
+	<blockquote>
+		<p><strong>Scouts will call or text to confirm return time.</strong></p>
+	</blockquote>
+	<p>Map of the Campsites</p>
+	<img src="media/image4.png" style="width:6.55208in;height:8.08333in" />
+<body>
+</html>

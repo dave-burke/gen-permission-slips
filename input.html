@@ -25,7 +25,7 @@
 			width: 20em;
 		}
 		input.name-input {
-			width: 10em;
+			width: 15em;
 		}
 		input.amount-input {
 			width: 5em;
@@ -37,7 +37,7 @@
 			width: 40em;
 		}
 		input.email-input {
-			width: 40em;
+			width: 35em;
 		}
 		section {
 			margin-top: 1rem;
@@ -46,8 +46,11 @@
 		table, thead, tbody, th, tr, td {
 			border: 0px;
 		}
-		.w-100 {
+		.w-full {
 			width: 100%;
+		}
+		.pr-16 {
+			padding-right: 4rem;
 		}
 		.text-16 * {
 			font-size: 1rem;
@@ -69,6 +72,9 @@
 		}
 		.text-center {
 			text-align: center;
+		}
+		.text-right {
+			text-align: right;
 		}
 		.nowrap {
 			white-space: nowrap;
@@ -106,7 +112,7 @@
 				<p><strong>Returning Location and Time: ***REMOVED*** @ 12:00 p.m. (Sunday – 4/14/23)</strong></p>
 			</section>
 			<section id="payment-section" class="text-10">
-				<table class="w-100">
+				<table class="w-full">
 					<thead>
 						<th><strong>Cost per participant: $45.00</strong> (SM &amp; ASMs – no charge)</th>
 						<th colspan="2">Method of payment for camping (circle one):</th>
@@ -151,7 +157,7 @@
 
 			<section id="contact-section" class="text-10">
 				<h2>Emergency Contacts:</h2>
-				<table class="w-100">
+				<table class="w-full">
 					<tr>
 						<td><input id="primary-contact-name-1" class="name-input"/></td>
 						<td><input id="primary-contact-phone-1" class="phone-input"/></td>
@@ -173,9 +179,9 @@
 						<td><label for="primary-contact-email-2">Email:</label></td>
 					</tr>
 				</table>
-				<table class="w-100">
-					<tr><td colspan="2"><input type="text" class="w-100"></td></tr>
-					<tr><td>Parent or Guardian Signature</td><td>Date</td></tr>
+				<table class="w-full">
+					<tr><td colspan="2"><input type="text" class="w-full"></td></tr>
+					<tr><td>Parent or Guardian Signature</td><td class="text-right pr-16">Date</td></tr>
 				</table>
 			</section>
 
@@ -194,6 +200,8 @@
 		<p><strong>Scouts will call or text to confirm return time.</strong></p>
 	</blockquote>
 	<p>Map of the Campsites</p>
+	<!--
 	<img src="media/image4.png" style="width:6.55208in;height:8.08333in" />
+	-->
 <body>
 </html>

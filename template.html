@@ -2,8 +2,8 @@
 <head>
 	<style>
 		@page {
-		  size: Letter; /* Change from the default size of A4 */
-		  margin: 0.5in; /* Set margin on each page */
+			size: Letter; /* Change from the default size of A4 */
+			margin: 0.5in; /* Set margin on each page */
 		}
 		h1 {
 			text-align: center;
@@ -113,16 +113,16 @@
 	<main>
 		<h1>
 			{{camp.name}} Camping
-			{{ departure | format_datetime("%m/%d") }} - {{ return | format_datetime("%m/%d") }}
+			{{ departure.time | format_datetime("%m/%d") }} - {{ return.time | format_datetime("%m/%d") }}
 		</h1>
 		<form>
 			<section id="intro-section" class="text-11">
 				<p>
 					I hereby grant permission for my son(s),
 					<input name="scout-names" type="text" class="name-input long">,
-					to participate in the <strong>{{ departure | format_datetime("%m/%d/%y") }}-{{ return | format_datetime("%m/%d/%y") }}</strong>
+					to participate in the <strong>{{ departure.time | format_datetime("%m/%d/%y") }}-{{ return.time | format_datetime("%m/%d/%y") }}</strong>
 					Hiking/Camping weekend at <strong>{{camp.name}}</strong>
-					under the leadership of Troop ***REMOVED***.
+					under the leadership of Troop {{troop.number}}.
 					<strong>See page 2 for additional details.</strong>
 				</p>
 			</section>
@@ -131,13 +131,20 @@
 				<table class="w-full">
 					<tbody>
 						<thead>
-							<tr><th>Name</th><th class="nowrap">scout/adult<br/>circle one</th><th class="text-right">Amount</th><th>&nbsp;</th></tr>
+							<tr><th>Name</th><th class="nowrap">scout/adult<br/>(circle one)</th><th class="text-right">Amount</th><th>&nbsp;</th></tr>
 						</thead>
 						<tr>
 							<td><input name="participant-name-1" class="name-input" type="text"></td>
 							<td>scout adult</td>
 							<td class="text-right">$<input name="participant-amount-1" class="amount-input" type="text"></td>
-							<td class="text-center"><strong>Cost per participant: $45.00</strong> (SM &amp; ASMs – no charge)</td>
+							<td class="text-center"><strong>
+								{% if cost.scout == cost.adult %}
+									Cost per participant: {{ cost.scout }}
+								{% else %}
+									Cost per scout: {{ cost.scout }}<br/>
+									Cost per adult: {{ cost.adult }}
+								{% endif %}
+							</strong></td>
 						</tr>
 						<tr>
 							<td><input name="participant-name-2" class="name-input" type="text"></td>
@@ -177,9 +184,14 @@
 			</section>
 
 			<section id="mailto-info" class="text-center">
-				<p class="text-12">Mail completed form and payment (payable to Troop ***REMOVED***) to:</p>
-				<p class="text-12">***REMOVED*** ***REMOVED*** – ***REMOVED*** ***REMOVED*** Ave., ***REMOVED***, ***REMOVED*** ***REMOVED***</p>
-				<p class="text-11">Questions - (***REMOVED***) ***REMOVED***-***REMOVED*** or ***REMOVED***@***REMOVED***</p>
+				<p class="text-12">Mail completed form and payment (payable to Troop {{troop.number}}) to:</p>
+				<p class="text-12">
+					{{coordinator.name}} – 
+					{{coordinator.address}}
+				</p>
+				<p class="text-11">
+					Questions - {{coordinator.phone}} or {{coordinator.email}}
+				</p>
 			</section>
 
 			<section id="medical-note-section" class="text-9">
@@ -224,21 +236,39 @@
 
 	<h1 class="new-page">PARENTS – FOR YOUR REFERENCE</h1>
 	<section>
-		<p>The troop will be <strong>tent camping</strong>.
-		<p>The scouts will be cooking the meals, so <strong>bring your mess kits!</strong></p>
+		<p>The troop will be <strong>{{camp.type}}</strong>.
+		{% if camp.messkits %}
+			<p>The scouts will be cooking the meals, so <strong>bring your mess kits!</strong></p>
+		{% else %}
+			<p>Meals will be provided.</p>
+		{% endif %}
 	</section>
 	<section>
-		<p><strong>Departing</strong> from ***REMOVED*** on <strong>Friday</strong> 04/12/23 @ <strong>5:15 p.m.</strong></p>
-		<p><strong>Returning</strong> to ***REMOVED*** on <strong>Sunday</strong> 04/14/23 @ <strong>12:00 p.m.</strong></p>
+		<p>
+			<strong>Departing</strong>
+			from {{departure.location}}
+			on <strong>{{departure.time | format_datetime('%A')}}</strong>
+			{{departure.time | format_datetime('%m/%d/%y')}}
+			@ <strong>{{departure.time | format_datetime('%I:%M %p')}}</strong>
+		</p>
+		<p>
+			<strong>Returning</strong>
+			from {{return.location}}
+			on <strong>{{return.time | format_datetime('%A')}}</strong>
+			{{return.time | format_datetime('%m/%d/%y')}}
+			@ <strong>{{return.time | format_datetime('%I:%M %p')}}</strong>
+		</p>
+	</section>
+	<section>
+		<p><strong>Scouts will call or text to confirm return time.</strong></p>
 	</section>
 	<h2>Camp info</h2>
 	<ul>
-		<li><strong>Website:</strong> <a href="http://www.dnr.state.mn.us/state_parks/whitewater/index.html">http://www.dnr.state.mn.us/state_parks/whitewater/index.html</a></li>
-		<li><strong>Phone:</strong> (507)932-3007
-		<li><strong>Address:</strong> {{camp.name}} – 19041 Hwy 74, Altura, ***REMOVED*** 55***REMOVED***</li>
-		<li><strong>Site:</strong> Group camp site (GC2)
+		<li><strong>Website:</strong> <a href="{{camp.url}}">{{camp.url}}</a></li>
+		<li><strong>Phone:</strong> {{camp.phone}}</li>
+		<li><strong>Address:</strong> {{camp.address}}</li>
+		<li><strong>Site:</strong> {{camp.site}} </li>
 	</ul>
-	<p><strong>Scouts will call or text to confirm return time.</strong></p>
-	<img class="center" src="2024-04-12 map.png" style="height:6in;" />
+	<img class="center" src="{{camp.map}}" style="height:6in;" />
 <body>
 </html>

@@ -106,18 +106,21 @@
 </head>
 <body>
 	<div id="image-header">
-		<img src="https://images.dnr.state.mn.us/destinations/state_parks/1_large/SPK00280_002.jpg" />
-		<img src="https://images.dnr.state.mn.us/destinations/state_parks/1_large/SPK00280_001.jpg" />
-		<img src="https://images.dnr.state.mn.us/destinations/state_parks/banners/spk00280.jpg" />
+		<img src="{{images.header1}}" />
+		<img src="{{images.header2}}" />
+		<img src="{{images.header3}}" />
 	</div>
 	<main>
-		<h1>{{camp.name}} Camping 04/12 - 04/14</h1>
+		<h1>
+			{{camp.name}} Camping
+			{{ departure | format_datetime("%m/%d") }} - {{ return | format_datetime("%m/%d") }}
+		</h1>
 		<form>
 			<section id="intro-section" class="text-11">
 				<p>
 					I hereby grant permission for my son(s),
 					<input name="scout-names" type="text" class="name-input long">,
-					to participate in the <strong>04/12/24-04/14/24</strong>
+					to participate in the <strong>{{ departure | format_datetime("%m/%d/%y") }}-{{ return | format_datetime("%m/%d/%y") }}</strong>
 					Hiking/Camping weekend at <strong>{{camp.name}}</strong>
 					under the leadership of Troop ***REMOVED***.
 					<strong>See page 2 for additional details.</strong>

@@ -1,2 +1,8 @@
+images:
+  header1: https://images.dnr.state.mn.us/destinations/state_parks/1_large/SPK00280_002.jpg
+  header2: https://images.dnr.state.mn.us/destinations/state_parks/1_large/SPK00280_001.jpg
+  header3: https://images.dnr.state.mn.us/destinations/state_parks/banners/spk00280.jpg
+departure: "2024-04-12T17:15"
+return: "2024-04-14T12:00"
 camp:
   name: Whitewater State Park

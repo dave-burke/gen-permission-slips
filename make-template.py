@@ -1,6 +1,11 @@
 import sys
 import yaml
 from jinja2 import Environment, FileSystemLoader
+from datetime import datetime
+
+def format_datetime(datetime_string, format_string):
+    datetime_obj = datetime.strptime(datetime_string, '%Y-%m-%dT%H:%M')
+    return datetime_obj.strftime(format_string)
 
 def render_template(template_file, data_file, output_file):
     # Load data from YAML file
@@ -9,6 +14,7 @@ def render_template(template_file, data_file, output_file):
 
     # Create Jinja2 environment
     env = Environment(loader=FileSystemLoader('.'))
+    env.filters['format_datetime'] = format_datetime
 
     # Load HTML template
     template = env.get_template(template_file)

@@ -106,9 +106,9 @@
 </head>
 <body>
 	<div id="image-header">
-		<img src="{{images.header1}}" />
-		<img src="{{images.header2}}" />
-		<img src="{{images.header3}}" />
+		{% if images.header1 %}<img src="{{images.header1}}" />{% endif %}
+		{% if images.header2 %}<img src="{{images.header2}}" />{% endif %}
+		{% if images.header3 %}<img src="{{images.header3}}" />{% endif %}
 	</div>
 	<main>
 		<h1>
@@ -267,8 +267,8 @@
 		<li><strong>Website:</strong> <a href="{{camp.url}}">{{camp.url}}</a></li>
 		<li><strong>Phone:</strong> {{camp.phone}}</li>
 		<li><strong>Address:</strong> {{camp.address}}</li>
-		<li><strong>Site:</strong> {{camp.site}} </li>
+		{% if camp.site %}<li><strong>Site:</strong> {{camp.site}} </li>{% endif %}
 	</ul>
-	<img class="center" src="{{camp.map}}" style="height:6in;" />
+	{% if camp.map %}<img class="center" src="{{camp.map}}" style="height:6in;" />{% endif %}
 <body>
 </html>

@@ -1,5 +1,5 @@
 images:
-  header1: "2024-04-26_ripley/header1.png"
+  header1: "2024-04-26/header1.png"
   header2: ""
   header3: ""
 camp:
@@ -16,10 +16,10 @@ cost:
   adult: "$35.00"
 departure:
   location: ***REMOVED***
-  time: "2024-04-26T17:15"
+  time: "2024-04-12T17:15"
 return:
   location: ***REMOVED***
-  time: "2024-04-28T12:00"
+  time: "2024-04-14T12:00"
 troop:
   number: ***REMOVED***
 coordinator:

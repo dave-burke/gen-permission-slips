@@ -112,7 +112,7 @@
 	</div>
 	<main>
 		<h1>
-			{{camp.name}} Camping
+			{{camp.name}}
 			{{ departure.time | format_datetime("%m/%d") }} - {{ return.time | format_datetime("%m/%d") }}
 		</h1>
 		<form>
@@ -121,7 +121,7 @@
 					I hereby grant permission for my son(s),
 					<input name="scout-names" type="text" class="name-input long">,
 					to participate in the <strong>{{ departure.time | format_datetime("%m/%d/%y") }}-{{ return.time | format_datetime("%m/%d/%y") }}</strong>
-					Hiking/Camping weekend at <strong>{{camp.name}}</strong>
+					event at <strong>{{camp.name}}</strong>
 					under the leadership of Troop {{troop.number}}.
 					<strong>See page 2 for additional details.</strong>
 				</p>

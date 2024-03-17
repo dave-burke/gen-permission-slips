@@ -1,3 +1,4 @@
 *.pdf
 venv
 tmp.html
+*/data.yaml

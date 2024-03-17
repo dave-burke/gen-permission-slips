@@ -1,15 +1,15 @@
 images:
-  header1: "2024-04-26_ripley/header1.png"
+  header1: ""
   header2: ""
   header3: ""
 camp:
-  name: Ripley Rendezvous
-  url: https://www.scoutingevent.com/296-Ripley24
-  phone: 320.251.3930 ext 106
-  address: 15000 Hwy 115 Little Falls, Minnesota 56345
+  name: "[CAMP NAME]"
+  url: https://www.example.com
+  phone: (555)555-5555
+  address: 123 Example St., Minnesota 55555
   site: 
-  type: sleeping in barracks
-  messkits: False
+  type: tent camping
+  messkits: True
   map: ""
 cost:
   scout: "$70.00"
@@ -23,7 +23,7 @@ return:
 troop:
   number: ***REMOVED***
 coordinator:
-  name: ***REMOVED*** ***REMOVED***
-  address: ***REMOVED*** ***REMOVED*** Ave. ***REMOVED***, ***REMOVED*** ***REMOVED***
-  phone: (***REMOVED***)***REMOVED***-***REMOVED***
-  email: ***REMOVED***@***REMOVED***
+  name: "[NAME]"
+  address: 742 Evergreen Terrace. Springfield, ***REMOVED*** 55555
+  phone: (555)555-5555
+  email: email@example.com

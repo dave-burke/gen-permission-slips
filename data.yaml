@@ -15,15 +15,15 @@ cost:
   scout: "$70.00"
   adult: "$35.00"
 departure:
-  location: ***REMOVED***
+  location: Some place
   time: "2024-04-26T17:15"
 return:
-  location: ***REMOVED***
+  location: Some place
   time: "2024-04-28T12:00"
 troop:
-  number: ***REMOVED***
+  number: 123
 coordinator:
   name: "[NAME]"
-  address: 742 Evergreen Terrace. Springfield, ***REMOVED*** 55555
+  address: 742 Evergreen Terrace. Springfield, IL 55555
   phone: (555)555-5555
   email: email@example.com

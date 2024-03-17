@@ -126,38 +126,38 @@
 							<tr><th>Name</th><th class="nowrap">scout/adult<br/>circle one</th><th class="text-right">Amount</th><th>&nbsp;</th></tr>
 						</thead>
 						<tr>
-							<td><input name="scout-name-1" class="name-input" type="text"></td>
+							<td><input name="participant-name-1" class="name-input" type="text"></td>
 							<td>scout adult</td>
-							<td class="text-right">$<input class="amount-input" type="text"></td>
+							<td class="text-right">$<input name="participant-amount-1" class="amount-input" type="text"></td>
 							<td class="text-center"><strong>Cost per participant: $45.00</strong> (SM &amp; ASMs – no charge)</td>
 						</tr>
 						<tr>
-							<td><input name="scout-name-3" class="name-input" type="text"></td>
+							<td><input name="participant-name-2" class="name-input" type="text"></td>
 							<td>scout adult</td>
-							<td class="text-right">$<input class="amount-input" type="text"></td>
+							<td class="text-right">$<input name="participant-amount-2" class="amount-input" type="text"></td>
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<td><input name="scout-name-2" class="name-input" type="text"></td>
+							<td><input name="participant-name-3" class="name-input" type="text"></td>
 							<td>scout adult</td>
-							<td class="text-right">$<input class="amount-input" type="text"></td>
+							<td class="text-right">$<input name="participant-amount-3" class="amount-input" type="text"></td>
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<td><input name="scout-name-4" class="name-input" type="text"></td>
+							<td><input name="participant-name-4" class="name-input" type="text"></td>
 							<td>scout adult</td>
-							<td class="text-right">$<input class="amount-input" type="text"></td>
+							<td class="text-right">$<input name="participant-amount-4" class="amount-input" type="text"></td>
 							<td class="text-center">Use an X to mark your payment type, or put amounts in each blank to split your payment</td>
 						</tr>
 						<tr>
 							<td>&nbsp;</td>
 							<td class="text-right">Total:</td>
-							<td class="text-right">$<input class="amount-input" type="text"></td>
+							<td class="text-right">$<input name="participant-amount-total"class="amount-input" type="text"></td>
 							<td>
 								<strong>Payment method:</strong>
-								Cash: <input type="number" class="amount-input"/>
-								Check: <input type="number" class="amount-input">
-								Camp fund: <input type="number" class="amount-input">
+								Cash: <input name="cach-amount" type="number" class="amount-input"/>
+								Check: <input name="check-amount" type="number" class="amount-input">
+								Camp fund: <input name="camp-fund-amount" type="number" class="amount-input">
 							</td>
 						</tr>
 					</tbody>
@@ -165,7 +165,7 @@
 			</section>
 			<section id="driver-section" class="text-9">
 				<h2>Drivers</h2>
-				<p><strong><input type="checkbox"> parent will drive and attend - able to transport <input class="amount-input" type="number"> scouts <input type="checkbox"> I am able to pull a trailer <input type="checkbox"> backup driver</strong></p>
+				<p><strong><input name="is-driver" type="checkbox"> parent will drive and attend - able to transport <input name="passenger-count" class="amount-input" type="number"> scouts <input name="can-pull-trailer" type="checkbox"> I am able to pull a trailer <input name="is-backup-driver" type="checkbox"> backup driver</strong></p>
 			</section>
 
 			<section id="mailto-info" class="text-center">
@@ -203,7 +203,7 @@
 					</tr>
 				</table>
 				<table class="w-full">
-					<tr><td colspan="2"><input type="text" class="w-full"></td></tr>
+					<tr><td colspan="2"><input name="signature-date" type="text" class="w-full"></td></tr>
 					<tr><td>Parent or Guardian Signature</td><td class="text-right pr-16">Date</td></tr>
 				</table>
 			</section>

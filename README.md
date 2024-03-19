@@ -18,8 +18,18 @@ Generate permission slip PDFs based on data in a yaml input file.
 ## Setup
 
 ```bash
-virtualenv venv
+pacman -S --needed bash base-devel python python-virtualenv python-weasyprint direnv evince
+
+# (not needed since venv dir is tracked by git)
+# virtualenv venv
+
+# ensure you have something like this in .bashrc: if command -v direnv > /dev/null; eval "$(direnv hook bash)"
+
 direnv allow
+
+# you may need to reload your shell now and cd back into this directory
+# you should see output from 'direnv' when you enter the directory
+
 pip install -r requirements.txt
 ```
 

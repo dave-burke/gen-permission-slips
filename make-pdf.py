@@ -2,12 +2,13 @@ import sys
 import yaml
 from jinja2 import Environment, FileSystemLoader
 from datetime import datetime
+from weasyprint import HTML
 
 def format_datetime(datetime_string, format_string):
     datetime_obj = datetime.strptime(datetime_string, '%Y-%m-%dT%H:%M')
     return datetime_obj.strftime(format_string)
 
-def render_template(template_file, data_file, output_file):
+def render_template(template_file, data_file):
     # Load data from YAML file
     with open(data_file, 'r') as f:
         data = yaml.safe_load(f)
@@ -19,10 +20,8 @@ def render_template(template_file, data_file, output_file):
     # Load HTML template
     template = env.get_template(template_file)
 
-    # Render template with data and write to output file
-    rendered_content = template.render(data)
-    with open(output_file, 'w') as f:
-        f.write(rendered_content)
+    # Render the data into the template
+    return template.render(data)
 
 if __name__ == "__main__":
     # Paths to template, data, and output files
@@ -31,5 +30,7 @@ if __name__ == "__main__":
     output_file = sys.argv[3]
 
     # Render template
-    render_template(template_file, data_file, output_file)
+    rendered_content = render_template(template_file, data_file)
 
+    # Write the PDF
+    HTML(string=rendered_content).write_pdf(target=output_file, pdf_forms=True, optimize_images=True)

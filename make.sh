@@ -7,6 +7,5 @@ if [[ $# -eq 0 ]]; then
 	exit 1
 fi
 
-make -e DATA="${1}/data.yaml"
-mv -v output.pdf "${1}.pdf"
+python ./make-pdf.py template.html "${1}/data.yaml" "${1}.pdf"
 evince "${1}.pdf"

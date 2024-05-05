@@ -4,13 +4,11 @@ Generate permission slip PDFs based on data in a yaml input file.
 
 ## Requirements
 
-- Python 3.x (for rendering template)
-- [weasyprint](https://weasyprint.org/) (for html to pdf conversion)
+- Python 3.x
 
 ### Optional (but highly recommended)
 
 - Bash (for running `make.sh`)
-- GNU Make (for running the build)
 - virtualenv (for keeping python dependencies contained)
 - direnv (to automatically activate/deactivate virtualenv)
 - Evince (for viewing PDFs)
@@ -18,7 +16,7 @@ Generate permission slip PDFs based on data in a yaml input file.
 ## Setup
 
 ```bash
-pacman -S --needed bash base-devel python python-virtualenv python-weasyprint direnv evince
+pacman -S --needed bash base-devel python python-virtualenv direnv evince
 
 # (not needed since venv dir is tracked by git)
 # virtualenv venv

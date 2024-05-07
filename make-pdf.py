@@ -32,5 +32,8 @@ if __name__ == "__main__":
     # Render template
     rendered_content = render_template(template_file, data_file)
 
+    # with open('debug.html', 'w') as f:
+        # f.write(rendered_content)
+
     # Write the PDF
     HTML(string=rendered_content).write_pdf(target=output_file, pdf_forms=True, optimize_images=True)

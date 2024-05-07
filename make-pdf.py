@@ -36,4 +36,4 @@ if __name__ == "__main__":
         # f.write(rendered_content)
 
     # Write the PDF
-    HTML(string=rendered_content).write_pdf(target=output_file, pdf_forms=True, optimize_images=True)
+    HTML(string=rendered_content, base_url='./').write_pdf(target=output_file, pdf_forms=True, optimize_images=True)

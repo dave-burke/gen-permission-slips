@@ -7,5 +7,5 @@ if [[ $# -eq 0 ]]; then
 	exit 1
 fi
 
-python ./make-pdf.py template.html "${1}/data.yaml" "${1}.pdf"
+python ./make_pdf.py template.html "${1}/data.yaml" "${1}.pdf"
 evince "${1}.pdf"

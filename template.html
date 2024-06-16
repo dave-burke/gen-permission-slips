@@ -252,15 +252,15 @@
 			<strong>Departing</strong>
 			from {{departure.location}}
 			on <strong>{{departure.time | format_datetime('%A')}}</strong>
-			{{departure.time | format_datetime('%m/%d/%y')}}
-			@ <strong>{{departure.time | format_datetime('%I:%M %p')}}</strong>
+			{{departure.time | format_datetime('%m/%d/%y')}}.
+			Meet at <strong>{{departure.time | format_datetime('%I:%M %p')}}</strong>
 		</p>
 		<p>
 			<strong>Returning</strong>
-			from {{return.location}}
+			to {{return.location}}
 			on <strong>{{return.time | format_datetime('%A')}}</strong>
 			{{return.time | format_datetime('%m/%d/%y')}}
-			@ <strong>{{return.time | format_datetime('%I:%M %p')}}</strong>
+			at <strong>approximately {{return.time | format_datetime('%I:%M %p')}}</strong>
 		</p>
 	</section>
 	<section>

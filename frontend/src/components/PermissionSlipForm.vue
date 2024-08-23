@@ -84,9 +84,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useLocalStorage } from '@vueuse/core'
 
 const valid = ref(false);
-const formData = ref({
+const formData = useLocalStorage('form-data', {
   images: {
     header1: "",
     header2: "",

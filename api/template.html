@@ -245,7 +245,8 @@
 
 	<h1 class="new-page">PARENTS – FOR YOUR REFERENCE</h1>
 	<section>
-		<p>The troop will be <strong>{{camp.type}}</strong>.
+		{% if camp.type %}<p>The troop will be <strong>{{camp.type}}</strong>.</p>{% endif %}
+		{% if camp.description %}{{camp.description}}{% endif %}
 		{% if camp.messkits %}
 			<p>The scouts will be cooking the meals, so <strong>bring your mess kits!</strong></p>
 		{% else %}

@@ -98,7 +98,7 @@
 			justify-content: center;
 		}
 		#image-header img {
-			height: 8rem; 
+			height: 6rem;
 			margin-left: 1rem;
 			margin-right: 1rem;
 		}
@@ -195,7 +195,7 @@
 			<section id="mailto-info" class="text-center">
 				<p class="text-12">Mail completed form and payment (payable to Troop {{troop.number}}) to:</p>
 				<p class="text-12">
-					{{coordinator.name}} – 
+					{{coordinator.name}} –
 					{{coordinator.address}}
 				</p>
 				<p class="text-11">
@@ -278,6 +278,6 @@
 		<li><strong>Address:</strong> {{camp.address}}</li>
 		{% if camp.site %}<li><strong>Site:</strong> {{camp.site}} </li>{% endif %}
 	</ul>
-	{% if camp.map %}<img class="center" src="{{camp.map}}" style="max-height:6in; width: 100%" />{% endif %}
+	{% if camp.map %}<img class="center" src="{{camp.map}}" style="max-height:5in; width: 100%" />{% endif %}
 <body>
 </html>

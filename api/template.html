@@ -279,6 +279,6 @@
 		<li><strong>Address:</strong> {{camp.address}}</li>
 		{% if camp.site %}<li><strong>Site:</strong> {{camp.site}} </li>{% endif %}
 	</ul>
-	{% if camp.map %}<img class="center" src="{{camp.map}}" style="max-height:5in; width: 100%" />{% endif %}
+	{% if camp.map %}<img class="center" src="{{camp.map}}" style="max-height:5in; width: 100%; height: auto; object-fit: contain" />{% endif %}
 <body>
 </html>

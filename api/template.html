@@ -1,284 +1,284 @@
 <html>
-<head>
-	<style>
-		@page {
-			size: Letter; /* Change from the default size of A4 */
-			margin: 0.5in; /* Set margin on each page */
-		}
-		h1 {
-			text-align: center;
-			font-size: 1.5rem;
-		}
-		h2 {
-			font-size: 1rem;
-		}
-		p {
-			margin-top: 0.3rem;
-			margin-bottom: 0.3rem;
-		}
-		input {
-			border: 0;
-			border-bottom: 1px solid black;
-			margin-top: 0.5rem;
-		}
-		input.name-input.long {
-			width: 20em;
-		}
-		input.name-input {
-			width: 15em;
-		}
-		input.amount-input {
-			width: 5em;
-		}
-		input.phone-input {
-			width: 15em;
-		}
-		input.phone-input-long {
-			width: 40em;
-		}
-		input.email-input {
-			width: 35em;
-		}
-		section {
-			margin-top: 1rem;
-			margin-bottom: 1rem;
-		}
-		table, thead, tbody, th, tr, td {
-			border: 0px;
-		}
-		table thead tr th {
-			font-weight: bold;
-		}
-		img.center {
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		.float-right {
-			float: right;
-		}
-		.w-full {
-			width: 100%;
-		}
-		.pr-16 {
-			padding-right: 4rem;
-		}
-		.text-16 * {
-			font-size: 1rem;
-		}
-		.text-12 * {
-			font-size: 0.75rem;
-		}
-		.text-11, .text-11 * {
-			font-size: 0.69rem;
-		}
-		.text-10, .text-10 * {
-			font-size: 0.63rem;
-		}
-		.text-9, .text-9 * {
-			font-size: 0.56rem;
-		}
-		.text-8 * {
-			font-size: 0.5rem;
-		}
-		.text-center {
-			text-align: center;
-		}
-		.text-right {
-			text-align: right;
-		}
-		.nowrap {
-			white-space: nowrap;
-		}
-		.new-page {
-			page-break-before: always;
-		}
-		#image-header {
-			display: flex;
-			justify-content: center;
-		}
-		#image-header img {
-			height: 6rem;
-			margin-left: 1rem;
-			margin-right: 1rem;
-		}
-		.urgent {
-			color: red;
-		}
-	</style>
-</head>
-<body>
-	<div id="image-header">
-		{% if images.header1 %}<img src="{{images.header1}}" />{% endif %}
-		{% if images.header2 %}<img src="{{images.header2}}" />{% endif %}
-		{% if images.header3 %}<img src="{{images.header3}}" />{% endif %}
-	</div>
-	<main>
-		<h1>
-			{{camp.name}}
-			{{ departure.time | format_datetime("%m/%d") }} - {{ return.time | format_datetime("%m/%d") }}
-			<span class="urgent">(FORM DUE: {{ dueDate | format_datetime("%m/%d") }})</span>
-		</h1>
-		<p class="text-11 text-center">Cancellations less than 2 weeks before camp are non-refundable.</p>
-		<form>
-			<section id="intro-section" class="text-11">
-				<p>
-					I hereby grant permission for my son(s) listed below to participate in the <strong>{{ departure.time | format_datetime("%m/%d/%y") }}-{{ return.time | format_datetime("%m/%d/%y") }}</strong>
-					event at <strong>{{camp.name}}</strong>
-					under the leadership of Troop {{troop.number}}.
-					<strong>See page 2 for additional details.</strong>
-				</p>
-			</section>
-			<section id="payment-section" class="text-10">
-				<h2>Participants</h2>
-				<table class="w-full">
-					<tbody>
-						<thead>
-							<tr><th>Name</th><th class="nowrap">scout/adult<br/>(circle one)</th><th class="text-right">Amount</th><th>&nbsp;</th></tr>
-						</thead>
-						<tr>
-							<td><input name="participant-name-1" class="name-input" type="text"></td>
-							<td>scout adult</td>
-							<td class="text-right">$<input name="participant-amount-1" class="amount-input" type="text"></td>
-							<td class="text-center"><strong>
-								{% if cost.scout == cost.adult %}
-									Cost per participant: {{ cost.scout }}
-								{% else %}
-									Cost per scout: {{ cost.scout }}<br/>
-									Cost per adult: {{ cost.adult }}
-								{% endif %}
-								<br/>(SM &amp; ASMs – no charge)
-							</strong></td>
-						</tr>
-						<tr>
-							<td><input name="participant-name-2" class="name-input" type="text"></td>
-							<td>scout adult</td>
-							<td class="text-right">$<input name="participant-amount-2" class="amount-input" type="text"></td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr>
-							<td><input name="participant-name-3" class="name-input" type="text"></td>
-							<td>scout adult</td>
-							<td class="text-right">$<input name="participant-amount-3" class="amount-input" type="text"></td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr>
-							<td><input name="participant-name-4" class="name-input" type="text"></td>
-							<td>scout adult</td>
-							<td class="text-right">$<input name="participant-amount-4" class="amount-input" type="text"></td>
-							<td class="text-center">Use an X to mark your payment type, or put amounts in each blank to split your payment</td>
-						</tr>
-						<tr>
-							<td>&nbsp;</td>
-							<td class="text-right">Total:</td>
-							<td class="text-right">$<input name="participant-amount-total"class="amount-input" type="text"></td>
-							<td>
-								<strong>Payment method:</strong>
-								Cash: <input name="cach-amount" type="number" class="amount-input"/>
-								Check: <input name="check-amount" type="number" class="amount-input">
-								Camp fund: <input name="camp-fund-amount" type="number" class="amount-input">
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
-			<section id="driver-section" class="text-9">
-				<h2>Drivers</h2>
-				<p>
-					<strong><input name="is-driver" type="checkbox"> parent will drive and attend -
-					able to transport <input name="passenger-count" class="amount-input" type="number"> total people (including driver)
-					<input name="can-pull-trailer" type="checkbox"> I can pull a trailer
-					<input name="is-backup-driver" type="checkbox"> backup driver</strong>
-				</p>
-			</section>
+  <head>
+    <style>
+      @page {
+        size: Letter; /* Change from the default size of A4 */
+        margin: 0.5in; /* Set margin on each page */
+      }
+      h1 {
+        text-align: center;
+        font-size: 1.5rem;
+      }
+      h2 {
+        font-size: 1rem;
+      }
+      p {
+        margin-top: 0.3rem;
+        margin-bottom: 0.3rem;
+      }
+      input {
+        border: 0;
+        border-bottom: 1px solid black;
+        margin-top: 0.5rem;
+      }
+      input.name-input.long {
+        width: 20em;
+      }
+      input.name-input {
+        width: 15em;
+      }
+      input.amount-input {
+        width: 5em;
+      }
+      input.phone-input {
+        width: 15em;
+      }
+      input.phone-input-long {
+        width: 40em;
+      }
+      input.email-input {
+        width: 35em;
+      }
+      section {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+      table, thead, tbody, th, tr, td {
+        border: 0px;
+      }
+      table thead tr th {
+        font-weight: bold;
+      }
+      img.center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .float-right {
+        float: right;
+      }
+      .w-full {
+        width: 100%;
+      }
+      .pr-16 {
+        padding-right: 4rem;
+      }
+      .text-16 * {
+        font-size: 1rem;
+      }
+      .text-12 * {
+        font-size: 0.75rem;
+      }
+      .text-11, .text-11 * {
+        font-size: 0.69rem;
+      }
+      .text-10, .text-10 * {
+        font-size: 0.63rem;
+      }
+      .text-9, .text-9 * {
+        font-size: 0.56rem;
+      }
+      .text-8 * {
+        font-size: 0.5rem;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .text-right {
+        text-align: right;
+      }
+      .nowrap {
+        white-space: nowrap;
+      }
+      .new-page {
+        page-break-before: always;
+      }
+      #image-header {
+        display: flex;
+        justify-content: center;
+      }
+      #image-header img {
+        height: 6rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+      .urgent {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="image-header">
+      {% if images.header1 %}<img src="{{images.header1}}" />{% endif %}
+      {% if images.header2 %}<img src="{{images.header2}}" />{% endif %}
+      {% if images.header3 %}<img src="{{images.header3}}" />{% endif %}
+    </div>
+    <main>
+      <h1>
+        {{camp.name}}
+        {{ departure.time | format_datetime("%m/%d") }} - {{ return.time | format_datetime("%m/%d") }}
+        <span class="urgent">(FORM DUE: {{ dueDate | format_datetime("%m/%d") }})</span>
+      </h1>
+      <p class="text-11 text-center">Cancellations less than 2 weeks before camp are non-refundable.</p>
+      <form>
+        <section id="intro-section" class="text-11">
+          <p>
+            I hereby grant permission for my son(s) listed below to participate in the <strong>{{ departure.time | format_datetime("%m/%d/%y") }}-{{ return.time | format_datetime("%m/%d/%y") }}</strong>
+            event at <strong>{{camp.name}}</strong>
+            under the leadership of Troop {{troop.number}}.
+            <strong>See page 2 for additional details.</strong>
+          </p>
+        </section>
+        <section id="payment-section" class="text-10">
+          <h2>Participants</h2>
+          <table class="w-full">
+            <tbody>
+              <thead>
+                <tr><th>Name</th><th class="nowrap">scout/adult<br/>(circle one)</th><th class="text-right">Amount</th><th>&nbsp;</th></tr>
+              </thead>
+              <tr>
+                <td><input name="participant-name-1" class="name-input" type="text"></td>
+                <td>scout adult</td>
+                <td class="text-right">$<input name="participant-amount-1" class="amount-input" type="text"></td>
+                <td class="text-center"><strong>
+                  {% if cost.scout == cost.adult %}
+                    Cost per participant: {{ cost.scout }}
+                  {% else %}
+                    Cost per scout: {{ cost.scout }}<br/>
+                    Cost per adult: {{ cost.adult }}
+                  {% endif %}
+                  <br/>(SM &amp; ASMs – no charge)
+                </strong></td>
+              </tr>
+              <tr>
+                <td><input name="participant-name-2" class="name-input" type="text"></td>
+                <td>scout adult</td>
+                <td class="text-right">$<input name="participant-amount-2" class="amount-input" type="text"></td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td><input name="participant-name-3" class="name-input" type="text"></td>
+                <td>scout adult</td>
+                <td class="text-right">$<input name="participant-amount-3" class="amount-input" type="text"></td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td><input name="participant-name-4" class="name-input" type="text"></td>
+                <td>scout adult</td>
+                <td class="text-right">$<input name="participant-amount-4" class="amount-input" type="text"></td>
+                <td class="text-center">Use an X to mark your payment type, or put amounts in each blank to split your payment</td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td class="text-right">Total:</td>
+                <td class="text-right">$<input name="participant-amount-total"class="amount-input" type="text"></td>
+                <td>
+                  <strong>Payment method:</strong>
+                  Cash: <input name="cach-amount" type="number" class="amount-input"/>
+                  Check: <input name="check-amount" type="number" class="amount-input">
+                  Camp fund: <input name="camp-fund-amount" type="number" class="amount-input">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section id="driver-section" class="text-9">
+          <h2>Drivers</h2>
+          <p>
+            <strong><input name="is-driver" type="checkbox"> parent will drive and attend -
+            able to transport <input name="passenger-count" class="amount-input" type="number"> total people (including driver)
+            <input name="can-pull-trailer" type="checkbox"> I can pull a trailer
+            <input name="is-backup-driver" type="checkbox"> backup driver</strong>
+          </p>
+        </section>
 
-			<section id="mailto-info" class="text-center">
-				<p class="text-12">Mail completed form and payment (payable to Troop {{troop.number}}) to:</p>
-				<p class="text-12">
-					{{coordinator.name}} –
-					{{coordinator.address}}
-				</p>
-				<p class="text-11">
-					Questions - {{coordinator.phone}} or {{coordinator.email}}
-				</p>
-			</section>
+        <section id="mailto-info" class="text-center">
+          <p class="text-12">Mail completed form and payment (payable to Troop {{troop.number}}) to:</p>
+          <p class="text-12">
+            {{coordinator.name}} –
+            {{coordinator.address}}
+          </p>
+          <p class="text-11">
+            Questions - {{coordinator.phone}} or {{coordinator.email}}
+          </p>
+        </section>
 
-			<section id="medical-note-section" class="text-9">
-				<p><strong>Please note any special medical considerations or restrictions in your son’s activities on the <u>BACK</u> of this form.</strong></p>
-			</section>
+        <section id="medical-note-section" class="text-9">
+          <p><strong>Please note any special medical considerations or restrictions in your son’s activities on the <u>BACK</u> of this form.</strong></p>
+        </section>
 
-			<section id="contact-section" class="text-10">
-				<h2>Emergency Contacts:</h2>
-				<table class="w-full">
-					<tr>
-						<td><input id="primary-contact-name-1" class="name-input"/></td>
-						<td><input id="primary-contact-phone-1" class="phone-input"/></td>
-						<td><input id="primary-contact-email-1" class="email-input"/></td>
-					</tr>
-					<tr>
-						<td><label for="primary-contact-name-1">Name:</label></td>
-						<td><label for="primary-contact-phone-1">Phone:</label></td>
-						<td><label for="primary-contact-email-1">Email:</label></td>
-					</tr>
-					<tr>
-						<td><input id="primary-contact-name-2" class="name-input"/></td>
-						<td><input id="primary-contact-phone-2" class="phone-input"/></td>
-						<td><input id="primary-contact-email-2" class="email-input"/></td>
-					</tr>
-					<tr>
-						<td><label for="primary-contact-name-2">Name:</label></td>
-						<td><label for="primary-contact-phone-2">Phone:</label></td>
-						<td><label for="primary-contact-email-2">Email:</label></td>
-					</tr>
-				</table>
-				<table class="w-full">
-					<tr><td colspan="2"><input name="signature-date" type="text" class="w-full"></td></tr>
-					<tr><td>Parent or Guardian Signature</td><td class="text-right pr-16">Date</td></tr>
-				</table>
-			</section>
+        <section id="contact-section" class="text-10">
+          <h2>Emergency Contacts:</h2>
+          <table class="w-full">
+            <tr>
+              <td><input id="primary-contact-name-1" class="name-input"/></td>
+              <td><input id="primary-contact-phone-1" class="phone-input"/></td>
+              <td><input id="primary-contact-email-1" class="email-input"/></td>
+            </tr>
+            <tr>
+              <td><label for="primary-contact-name-1">Name:</label></td>
+              <td><label for="primary-contact-phone-1">Phone:</label></td>
+              <td><label for="primary-contact-email-1">Email:</label></td>
+            </tr>
+            <tr>
+              <td><input id="primary-contact-name-2" class="name-input"/></td>
+              <td><input id="primary-contact-phone-2" class="phone-input"/></td>
+              <td><input id="primary-contact-email-2" class="email-input"/></td>
+            </tr>
+            <tr>
+              <td><label for="primary-contact-name-2">Name:</label></td>
+              <td><label for="primary-contact-phone-2">Phone:</label></td>
+              <td><label for="primary-contact-email-2">Email:</label></td>
+            </tr>
+          </table>
+          <table class="w-full">
+            <tr><td colspan="2"><input name="signature-date" type="text" class="w-full"></td></tr>
+            <tr><td>Parent or Guardian Signature</td><td class="text-right pr-16">Date</td></tr>
+          </table>
+        </section>
 
-			<section id="permission-statement">
-				<p class="text-9"><strong>In consideration of his engaging in this activity:</strong> My son(s) has my permission to engage in all prescribed activities, except as noted by me on the back of this form. In case of an emergency, I understand every effort will be made to contact me. In the event that I cannot be reached, I hereby give my permission to the physician selected by an adult leader in charge of the activity to secure proper medical treatment, including hospitalization, anesthesia, surgery, or injections of medications for my son. I have specified any special considerations for my son (allergies, prescribed medications, etc.) which may affect his treatment on the back of this form. I agree to save harmless the said leaders and their associates, our unit’s sponsoring organization, and the Boy Scouts of America because of any claim arising on behalf of my son from possible injury or illness while engaged in this activity.</p>
-			</section>
-		</form>
-	<main>
+        <section id="permission-statement">
+          <p class="text-9"><strong>In consideration of his engaging in this activity:</strong> My son(s) has my permission to engage in all prescribed activities, except as noted by me on the back of this form. In case of an emergency, I understand every effort will be made to contact me. In the event that I cannot be reached, I hereby give my permission to the physician selected by an adult leader in charge of the activity to secure proper medical treatment, including hospitalization, anesthesia, surgery, or injections of medications for my son. I have specified any special considerations for my son (allergies, prescribed medications, etc.) which may affect his treatment on the back of this form. I agree to save harmless the said leaders and their associates, our unit’s sponsoring organization, and the Boy Scouts of America because of any claim arising on behalf of my son from possible injury or illness while engaged in this activity.</p>
+        </section>
+      </form>
+    </main>
 
-	<h1 class="new-page">PARENTS – FOR YOUR REFERENCE</h1>
-	<section>
-		{% if camp.type %}<p>The troop will be <strong>{{camp.type}}</strong>.</p>{% endif %}
-		{% if camp.description %}{{camp.description}}{% endif %}
-		{% if camp.messkits %}
-			<p>The scouts will be cooking the meals, so <strong>bring your mess kits!</strong></p>
-		{% else %}
-			<p>Meals will be provided.</p>
-		{% endif %}
-	</section>
-	<section>
-		<p>
-			<strong>Departing</strong>
-			from {{departure.location}}
-			on <strong>{{departure.time | format_datetime('%A')}}</strong>
-			{{departure.time | format_datetime('%m/%d/%y')}}.
-			Meet at <strong>{{departure.time | format_datetime('%I:%M %p')}}</strong>
-		</p>
-		<p>
-			<strong>Returning</strong>
-			to {{return.location}}
-			on <strong>{{return.time | format_datetime('%A')}}</strong>
-			{{return.time | format_datetime('%m/%d/%y')}}
-			at <strong>approximately {{return.time | format_datetime('%I:%M %p')}}</strong>
-		</p>
-	</section>
-	<section>
-		<p><strong>Scouts will call or text to confirm return time.</strong></p>
-	</section>
-	<h2>Camp info</h2>
-	<ul>
-		<li><strong>Website:</strong> <a href="{{camp.url}}">{{camp.url}}</a></li>
-		<li><strong>Phone:</strong> {{camp.phone}}</li>
-		<li><strong>Address:</strong> {{camp.address}}</li>
-		{% if camp.site %}<li><strong>Site:</strong> {{camp.site}} </li>{% endif %}
-	</ul>
-	{% if camp.map %}<img class="center" src="{{camp.map}}" style="max-height:5in; width: 100%; height: auto; object-fit: contain" />{% endif %}
-<body>
+    <h1 class="new-page">PARENTS – FOR YOUR REFERENCE</h1>
+    <section>
+      {% if camp.type %}<p>The troop will be <strong>{{camp.type}}</strong>.</p>{% endif %}
+      {% if camp.description %}{{camp.description}}{% endif %}
+      {% if camp.messkits %}
+        <p>The scouts will be cooking the meals, so <strong>bring your mess kits!</strong></p>
+      {% else %}
+        <p>Meals will be provided.</p>
+      {% endif %}
+    </section>
+    <section>
+      <p>
+        <strong>Departing</strong>
+        from {{departure.location}}
+        on <strong>{{departure.time | format_datetime('%A')}}</strong>
+        {{departure.time | format_datetime('%m/%d/%y')}}.
+        Meet at <strong>{{departure.time | format_datetime('%I:%M %p')}}</strong>
+      </p>
+      <p>
+        <strong>Returning</strong>
+        to {{return.location}}
+        on <strong>{{return.time | format_datetime('%A')}}</strong>
+        {{return.time | format_datetime('%m/%d/%y')}}
+        at <strong>approximately {{return.time | format_datetime('%I:%M %p')}}</strong>
+      </p>
+    </section>
+    <section>
+      <p><strong>Scouts will call or text to confirm return time.</strong></p>
+    </section>
+    <h2>Camp info</h2>
+    <ul>
+      <li><strong>Website:</strong> <a href="{{camp.url}}">{{camp.url}}</a></li>
+      <li><strong>Phone:</strong> {{camp.phone}}</li>
+      <li><strong>Address:</strong> {{camp.address}}</li>
+      {% if camp.site %}<li><strong>Site:</strong> {{camp.site}} </li>{% endif %}
+    </ul>
+    {% if camp.map %}<img class="center" src="{{camp.map}}" style="max-height:5in; width: 100%; height: auto; object-fit: contain" />{% endif %}
+  <body>
 </html>

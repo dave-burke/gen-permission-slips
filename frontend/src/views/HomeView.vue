@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import PermissionSlipForm from '@/components/PermissionSlipForm.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <h1>Hello</h1>
+    <PermissionSlipForm></PermissionSlipForm>
   </main>
 </template>

@@ -247,7 +247,7 @@ const formData = useLocalStorage('form-data', {
 })
 
 // Validation Rules
-const requiredRule = (value: any) => !!value || 'This field is required'
+const requiredRule = (value: string | number) => !!value || 'This field is required'
 const numericRule = (value: number) => !isNaN(value) || 'Must be a number'
 const dollarRule = (value: string) =>
   /^\$?\d+(\.\d{2})?$/.test(value) || 'Must be a valid dollar amount'

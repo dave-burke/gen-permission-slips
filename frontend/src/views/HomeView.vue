@@ -4,7 +4,6 @@ import PermissionSlipForm from '@/components/PermissionSlipForm.vue'
 
 <template>
   <main>
-    <h1>Hello</h1>
     <PermissionSlipForm></PermissionSlipForm>
   </main>
 </template>

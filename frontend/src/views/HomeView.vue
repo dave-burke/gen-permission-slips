@@ -3,7 +3,5 @@ import PermissionSlipForm from '@/components/PermissionSlipForm.vue'
 </script>
 
 <template>
-  <main>
-    <PermissionSlipForm></PermissionSlipForm>
-  </main>
+  <PermissionSlipForm></PermissionSlipForm>
 </template>

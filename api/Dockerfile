@@ -1,31 +1,37 @@
 FROM python:3.12-slim
 
-WORKDIR /app
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
-# Required by weasyprint
-RUN apt-get update && apt-get install -y \
+# Create a non-root user
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+
+# Install dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libpango1.0-0 \
     libcairo2 \
     libgdk-pixbuf2.0-0 \
     libffi-dev \
     shared-mime-info \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install pip dependencies
-COPY requirements.txt /app
+# Set work directory
+WORKDIR /app
+
+# Copy dependency list and install
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the app
-COPY template.html /app
-COPY make_pdf.py /app
-COPY web.py /app
+# Copy source code
+COPY template.html .
+COPY make_pdf.py .
+COPY web.py .
 
-# Open flask port
+# Use non-root user from now on
+USER appuser
+
+# Use a production server
 EXPOSE 5000
-
-# Tells flask what 'run' should run
-ENV FLASK_APP=web.py
-
-# host=0.0.0.0 allows access outside the container
-CMD ["flask", "run", "--host=0.0.0.0"]
-
+CMD ["waitress-serve", "--host=0.0.0.0", "--port=5000", "web:app"]

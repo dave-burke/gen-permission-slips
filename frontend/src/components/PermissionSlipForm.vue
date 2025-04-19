@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import { useLocalStorage } from '@vueuse/core'
 
+const emit = defineEmits(['submit'])
+
 const valid = ref(false)
 const formData = useLocalStorage('form-data', {
   images: {
@@ -55,8 +57,7 @@ const isoDatetimeRule = (value: string) =>
   !isNaN(Date.parse(value)) || 'Must be a valid ISO datetime string'
 
 const submit = () => {
-  console.log(formData.value)
-  // Convert formData to YAML if needed, and submit or process it.
+  emit('submit', formData.value)
 }
 </script>
 <template>

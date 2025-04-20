@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useLocalStorage } from '@vueuse/core'
+import { useLocalStorage, watchDebounced } from '@vueuse/core'
 
-const emit = defineEmits(['submit'])
+const emit = defineEmits(['update'])
 
 const valid = ref(false)
 const formData = useLocalStorage('form-data', {
@@ -45,6 +45,19 @@ const formData = useLocalStorage('form-data', {
   },
 })
 
+watchDebounced(
+  formData,
+  () => {
+    if (valid.value) {
+      console.log(`Changed at ${new Date()}!`)
+      emit('update', formData.value)
+    } else {
+      console.log('Form not valid')
+    }
+  },
+  { debounce: 500, maxWait: 5_000, deep: true },
+)
+
 // Validation Rules
 const requiredRule = (value: string | number) => !!value || 'This field is required'
 const urlRule = (value: string) => !value || /^https?:\/\//.test(value) || 'Must be a URL'
@@ -56,10 +69,6 @@ const phoneRule = (value: string) =>
 const emailRule = (value: string) => /.+@.+\..+/.test(value) || 'Must be a valid email address'
 const isoDatetimeRule = (value: string) =>
   !isNaN(Date.parse(value)) || 'Must be a valid ISO datetime string'
-
-const submit = () => {
-  emit('submit', formData.value)
-}
 </script>
 <template>
   <v-form ref="form" v-model="valid">
@@ -250,8 +259,5 @@ const submit = () => {
         ></v-text-field>
       </v-card-text>
     </v-card>
-
-    <!-- Submit Button -->
-    <v-btn :disabled="!valid" color="primary" @click="submit">Submit</v-btn>
   </v-form>
 </template>

@@ -5,7 +5,7 @@ import fetchival from 'fetchival'
 
 const pdfSrc = ref(null)
 
-async function handleSubmit(e) {
+async function handleUpdate(e) {
   try {
     const response = await fetchival('/api/pdf', { responseAs: 'response' }).post(e)
     if (!response.ok) {
@@ -26,7 +26,7 @@ async function handleSubmit(e) {
   <v-container>
     <v-row>
       <v-col>
-        <PermissionSlipForm @submit="handleSubmit"></PermissionSlipForm>
+        <PermissionSlipForm @update="handleUpdate"></PermissionSlipForm>
       </v-col>
       <v-col v-if="pdfSrc">
         <iframe :src="pdfSrc" width="100%" height="100%" />

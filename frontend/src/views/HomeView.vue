@@ -29,6 +29,7 @@ async function handleUpdate(e) {
         <PermissionSlipForm @update="handleUpdate"></PermissionSlipForm>
       </v-col>
       <v-col v-if="pdfSrc">
+        <iframe :src="pdfSrc" width="100%" height="750px" />
         <v-btn
           color="primary"
           class="mt-4"
@@ -38,7 +39,6 @@ async function handleUpdate(e) {
         >
           Download PDF
         </v-btn>
-        <iframe :src="pdfSrc" width="100%" height="100%" />
       </v-col>
     </v-row>
   </v-container>

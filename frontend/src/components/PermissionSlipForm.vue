@@ -103,7 +103,7 @@ const isoDatetimeRule = (value: string) =>
         <v-text-field
           v-model="formData.dueDate"
           label="Due date"
-          type="datetime-local"
+          type="date"
           :rules="[requiredRule, isoDatetimeRule]"
           density="compact"
         ></v-text-field>

@@ -11,6 +11,7 @@ const formData = useLocalStorage('form-data', {
     header2: '',
     header3: '',
   },
+  dueDate: '',
   camp: {
     name: '',
     url: '',
@@ -85,6 +86,16 @@ const submit = () => {
           :rules="[urlRule]"
         ></v-text-field>
       </v-card-text>
+    </v-card>
+
+    <v-card>
+      <v-text-field
+        v-model="formData.dueDate"
+        label="Due date"
+        type="datetime-local"
+        :rules="[requiredRule, isoDatetimeRule]"
+        density="compact"
+      ></v-text-field>
     </v-card>
 
     <!-- Camp Section -->

@@ -50,13 +50,12 @@ watchDebounced(
   formData,
   () => {
     if (valid.value) {
-      console.log(`Changed at ${new Date()}!`)
       emit('update', formData.value)
     } else {
       console.log('Form not valid')
     }
   },
-  { debounce: 500, maxWait: 5_000, deep: true },
+  { debounce: 500, maxWait: 5_000, deep: true, immediate: true },
 )
 
 // Validation Rules

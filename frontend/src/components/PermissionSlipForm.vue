@@ -97,14 +97,17 @@ const isoDatetimeRule = (value: string) =>
       </v-card-text>
     </v-card>
 
-    <v-card>
-      <v-text-field
-        v-model="formData.dueDate"
-        label="Due date"
-        type="datetime-local"
-        :rules="[requiredRule, isoDatetimeRule]"
-        density="compact"
-      ></v-text-field>
+    <v-card outlined class="mb-4">
+      <v-card-title>Due date</v-card-title>
+      <v-card-text>
+        <v-text-field
+          v-model="formData.dueDate"
+          label="Due date"
+          type="datetime-local"
+          :rules="[requiredRule, isoDatetimeRule]"
+          density="compact"
+        ></v-text-field>
+      </v-card-text>
     </v-card>
 
     <!-- Camp Section -->

@@ -15,7 +15,6 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@vue-pdf-viewer/viewer": "^2.4.0",
     "@vueuse/core": "^13.1.0",
     "fetchival": "^0.3.3",
     "pinia": "^3.0.1",

@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import PermissionSlipForm from '@/components/PermissionSlipForm.vue'
-import { VPdfViewer } from '@vue-pdf-viewer/viewer'
 import fetchival from 'fetchival'
 
-const pdfData = ref(null)
+const pdfSrc = ref(null)
 
 async function handleSubmit(e) {
-  // todo post
   try {
-    const response = await fetchival('http://localhost:5000/pdf', { responseAs: 'response' }).post(
-      e,
-    )
+    const response = await fetchival('/api/pdf', { responseAs: 'response' }).post(e)
+    if (!response.ok) {
+      throw new Error(`Server responded with ${response.status}`)
+    }
     console.log(response)
+    if (pdfSrc.value) {
+      URL.revokeObjectURL(pdfSrc.value)
+    }
+    pdfSrc.value = URL.createObjectURL(await response.blob())
   } catch (err) {
     console.log(err)
   }
@@ -25,8 +28,8 @@ async function handleSubmit(e) {
       <v-col>
         <PermissionSlipForm @submit="handleSubmit"></PermissionSlipForm>
       </v-col>
-      <v-col v-if="pdfData">
-        <VPdfViewer :src="pdfData" />
+      <v-col v-if="pdfSrc">
+        <iframe :src="pdfSrc" width="100%" height="100%" />
       </v-col>
     </v-row>
   </v-container>

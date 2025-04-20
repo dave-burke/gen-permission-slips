@@ -5,6 +5,7 @@ import { useLocalStorage, watchDebounced } from '@vueuse/core'
 const emit = defineEmits(['update'])
 
 const valid = ref(false)
+
 const formData = useLocalStorage('form-data', {
   images: {
     header1: '',
@@ -18,8 +19,8 @@ const formData = useLocalStorage('form-data', {
     phone: '',
     address: '',
     site: '',
-    type: '',
-    messkits: false,
+    type: 'tent camping',
+    messkits: true,
     map: '',
   },
   cost: {
@@ -147,7 +148,7 @@ const isoDatetimeRule = (value: string) =>
         <v-select
           v-model="formData.camp.type"
           label="Camp Type"
-          :items="['Tent camping', 'Cabin camping']"
+          :items="['tent camping', 'cabin camping']"
           :rules="[requiredRule]"
           density="compact"
         ></v-select>

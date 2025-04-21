@@ -1,61 +1,50 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useLocalStorage, watchDebounced } from '@vueuse/core'
+import merge from 'lodash/merge'
 
-const emit = defineEmits(['update'])
+const formData = defineModel('data', { type: Object, default: {} })
+const valid = defineModel('valid', { type: Boolean, default: false })
 
-const valid = ref(false)
-
-const formData = useLocalStorage('form-data', {
-  images: {
-    header1: '',
-    header2: '',
-    header3: '',
+merge(
+  {
+    images: {
+      header1: '',
+      header2: '',
+      header3: '',
+    },
+    dueDate: '',
+    camp: {
+      name: '',
+      url: '',
+      phone: '',
+      address: '',
+      site: '',
+      type: 'tent camping',
+      messkits: true,
+      map: '',
+    },
+    cost: {
+      scout: '',
+      adult: '',
+    },
+    departure: {
+      location: '',
+      time: '',
+    },
+    return: {
+      location: '',
+      time: '',
+    },
+    troop: {
+      number: '',
+    },
+    coordinator: {
+      name: '',
+      address: '',
+      phone: '',
+      email: '',
+    },
   },
-  dueDate: '',
-  camp: {
-    name: '',
-    url: '',
-    phone: '',
-    address: '',
-    site: '',
-    type: 'tent camping',
-    messkits: true,
-    map: '',
-  },
-  cost: {
-    scout: '',
-    adult: '',
-  },
-  departure: {
-    location: '',
-    time: '',
-  },
-  return: {
-    location: '',
-    time: '',
-  },
-  troop: {
-    number: '',
-  },
-  coordinator: {
-    name: '',
-    address: '',
-    phone: '',
-    email: '',
-  },
-})
-
-watchDebounced(
-  formData,
-  () => {
-    if (valid.value) {
-      emit('update', formData.value)
-    } else {
-      console.log('Form not valid')
-    }
-  },
-  { debounce: 500, maxWait: 5_000, deep: true, immediate: true },
+  formData.value,
 )
 
 // Validation Rules

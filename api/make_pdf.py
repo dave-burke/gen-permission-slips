@@ -5,8 +5,14 @@ from datetime import datetime
 from weasyprint import HTML
 
 def format_datetime(datetime_string, format_string):
-    datetime_obj = datetime.strptime(datetime_string, '%Y-%m-%dT%H:%M')
-    return datetime_obj.strftime(format_string)
+    valid_formats = ['%Y-%m-%dT%H:%M', '%Y-%m-%d']
+    for fmt in valid_formats:
+        try:
+            datetime_obj = datetime.strptime(datetime_string, fmt)
+            return datetime_obj.strftime(format_string)
+        except ValueError:
+            continue
+    raise ValueError(f"Invalid datetime format: {datetime_string}")
 
 def render_template(template_content, data_yaml):
     # Create Jinja2 environment

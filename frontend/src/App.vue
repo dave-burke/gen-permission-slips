@@ -1,11 +1,11 @@
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+</script>
+
 <template>
   <v-app>
     <v-main>
-      <PermissionSlipForm/>
+      <RouterView />
     </v-main>
   </v-app>
 </template>
-
-<script setup lang="ts">
-import PermissionSlipForm from './components/PermissionSlipForm.vue';
-</script>

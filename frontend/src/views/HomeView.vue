@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import PermissionSlipForm from '@/components/PermissionSlipForm.vue'
-import fetchival from 'fetchival'
+import { ofetch } from 'ofetch'
 import { useLocalStorage, watchDebounced } from '@vueuse/core'
 
 const pdfSrc = ref<string | null>(null)
@@ -17,15 +17,15 @@ watchDebounced(
       return
     }
     try {
-      const response = await fetchival('/api/pdf', { responseAs: 'response' }).post(formData.value)
-      if (!response.ok) {
-        throw new Error(`Server responded with ${response.status}`)
-      }
-      console.log(response)
+      const blob = await ofetch('/api/pdf', {
+        method: 'POST',
+        body: formData.value,
+        responseType: 'blob',
+      })
       if (pdfSrc.value) {
         URL.revokeObjectURL(pdfSrc.value)
       }
-      pdfSrc.value = URL.createObjectURL(await response.blob())
+      pdfSrc.value = URL.createObjectURL(blob)
     } catch (err) {
       console.log(err)
     }

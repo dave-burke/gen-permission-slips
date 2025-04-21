@@ -67,19 +67,19 @@ const isoDatetimeRule = (value: string) =>
       <v-card-text>
         <v-text-field
           v-model="formData.images.header1"
-          label="Header 1 Image URL"
+          label="Header Image URL 1"
           density="compact"
           :rules="[urlRule]"
         ></v-text-field>
         <v-text-field
           v-model="formData.images.header2"
-          label="Header 2 Image URL"
+          label="Header Image URL 2"
           density="compact"
           :rules="[urlRule]"
         ></v-text-field>
         <v-text-field
           v-model="formData.images.header3"
-          label="Header 3 Image URL"
+          label="Header Image URL 2"
           density="compact"
           :rules="[urlRule]"
         ></v-text-field>

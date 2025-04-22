@@ -12,10 +12,6 @@ const valid = ref(false)
 const formData = useLocalStorage('form-data', {})
 const form = useTemplateRef('form')
 const errors = computed(() => form.value?.errors ?? [])
-watch(errors, () => {
-  console.log(JSON.stringify(errors.value))
-})
-
 const pdfSrc = ref<string | null>(null)
 
 watchDebounced(
@@ -71,7 +67,14 @@ watchDebounced(
               Download PDF
             </v-btn>
           </template>
-          <template v-else>No PDF data. Is the form filled out fully and correctly?</template>
+          <template v-else>
+            No PDF data. Is the form filled out fully and correctly?
+            <ul>
+              <li v-for="error in errors" :key="error.id">
+                {{ error.errorMessages[0] }}
+              </li>
+            </ul>
+          </template>
         </v-tabs-window-item>
       </v-tabs-window>
     </v-card-text>

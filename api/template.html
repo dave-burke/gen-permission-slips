@@ -141,7 +141,7 @@
       <h1>
         {{camp.name}}
         {{ departure.time | format_datetime("%m/%d") }} - {{ return.time | format_datetime("%m/%d") }}
-        <span class="urgent">(FORM DUE: {{ dueDate | format_datetime("%m/%d") }})</span>
+        <span class="urgent nowrap">(FORM DUE: {{ dueDate | format_datetime("%m/%d") }})</span>
       </h1>
       <p class="text-11 text-center">Cancellations less than 2 weeks before camp are non-refundable.</p>
       <form>

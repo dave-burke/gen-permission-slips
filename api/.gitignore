@@ -3,3 +3,5 @@ venv
 tmp.html
 */data.yaml
 20*/
+*.tar
+camp-forms-labels.txt

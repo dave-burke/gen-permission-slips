@@ -72,7 +72,7 @@ const isoDatetimeRule = (name) => (value: string) =>
   !isNaN(Date.parse(value)) || `${name} must be a valid ISO datetime string`
 </script>
 <template>
-  <v-form ref="form" v-model="valid">
+  <v-form ref="form" v-model="valid" validate-on="input eager">
     <!-- Images Section -->
     <v-card outlined class="mb-4">
       <v-card-title>Images</v-card-title>

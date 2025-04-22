@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify'
-import { ref } from 'vue'
+import { ref, computed, watch, useTemplateRef } from 'vue'
 import PermissionSlipForm from '@/components/PermissionSlipForm.vue'
 import { ofetch } from 'ofetch'
 import { useLocalStorage, watchDebounced } from '@vueuse/core'
@@ -10,6 +10,11 @@ const { smAndDown } = useDisplay()
 
 const valid = ref(false)
 const formData = useLocalStorage('form-data', {})
+const form = useTemplateRef('form')
+const errors = computed(() => form.value?.errors ?? [])
+watch(errors, () => {
+  console.log(JSON.stringify(errors.value))
+})
 
 const pdfSrc = ref<string | null>(null)
 
@@ -47,7 +52,11 @@ watchDebounced(
     <v-card-text>
       <v-tabs-window v-model="tab">
         <v-tabs-window-item value="form">
-          <PermissionSlipForm v-model:valid="valid" v-model:data="formData"></PermissionSlipForm>
+          <PermissionSlipForm
+            v-model:valid="valid"
+            v-model:data="formData"
+            ref="form"
+          ></PermissionSlipForm>
         </v-tabs-window-item>
         <v-tabs-window-item value="pdf">
           <template v-if="pdfSrc">

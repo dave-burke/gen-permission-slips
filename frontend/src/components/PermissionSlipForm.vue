@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { onBeforeMount } from 'vue'
+import { computed, watch, useTemplateRef, onBeforeMount } from 'vue'
 import merge from 'lodash/merge'
 
 const formData = defineModel('data', { type: Object, default: {} })
-const valid = defineModel('valid', { type: Boolean, default: false })
-
 onBeforeMount(() => {
   const defaultData = {
     images: {
@@ -47,6 +45,11 @@ onBeforeMount(() => {
   }
   formData.value = merge(defaultData, formData.value)
 })
+
+const valid = defineModel('valid', { type: Boolean, default: false })
+const form = useTemplateRef('form')
+const errors = computed(() => form.value?.errors ?? [])
+defineExpose({ errors })
 
 // Validation Rules
 const requiredRule = (value: string | number) => !!value || 'This field is required'

@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { onBeforeMount } from 'vue'
 import merge from 'lodash/merge'
 
 const formData = defineModel('data', { type: Object, default: {} })
 const valid = defineModel('valid', { type: Boolean, default: false })
 
-merge(
-  {
+onBeforeMount(() => {
+  const defaultData = {
     images: {
       header1: '',
       header2: '',
@@ -43,9 +44,9 @@ merge(
       phone: '',
       email: '',
     },
-  },
-  formData.value,
-)
+  }
+  formData.value = merge(defaultData, formData.value)
+})
 
 // Validation Rules
 const requiredRule = (value: string | number) => !!value || 'This field is required'

@@ -106,6 +106,29 @@
       .urgent {
         color: red;
       }
+      input[type=radio] {
+        background: #eee;
+        border: 2px solid black;
+        margin: 0.2rem 0;
+        box-sizing: border-box;
+        border-radius: 100%;
+        background-clip: content-box;
+        height: 1.5rem;
+        padding: 0.1rem;
+        width: 1.5rem;
+      }
+      input[type="radio"]:checked::after {
+        content: "";
+        display: block;
+        width: 1.5rem;  /* Slightly smaller than parent */
+        height: 1.5rem; /* Slightly smaller than parent */
+        border-radius: 50%;
+        background-color: #ff0000;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     </style>
   </head>
   <body>

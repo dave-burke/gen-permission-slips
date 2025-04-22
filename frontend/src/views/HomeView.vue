@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify'
-import { ref, computed, watch, useTemplateRef } from 'vue'
+import { ref, computed, useTemplateRef } from 'vue'
 import PermissionSlipForm from '@/components/PermissionSlipForm.vue'
 import { ofetch } from 'ofetch'
 import { useLocalStorage, watchDebounced } from '@vueuse/core'
@@ -19,6 +19,7 @@ watchDebounced(
   async () => {
     if (!valid.value) {
       console.log('Form not valid')
+      pdfSrc.value = null
       return
     }
     try {
@@ -71,7 +72,7 @@ watchDebounced(
             No PDF data. Is the form filled out fully and correctly?
             <ul>
               <li v-for="error in errors" :key="error.id">
-                {{ error.errorMessages[0] }}
+                {{ error.errorMessages.join(", '") }}
               </li>
             </ul>
           </template>

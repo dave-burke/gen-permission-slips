@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watch, useTemplateRef, onBeforeMount } from 'vue'
+import { computed, useTemplateRef, onBeforeMount } from 'vue'
 import merge from 'lodash/merge'
 
 const formData = defineModel('data', { type: Object, default: {} })
@@ -52,16 +52,24 @@ const errors = computed(() => form.value?.errors ?? [])
 defineExpose({ errors })
 
 // Validation Rules
-const requiredRule = (value: string | number) => !!value || 'This field is required'
-const urlRule = (value: string) => !value || /^https?:\/\//.test(value) || 'Must be a URL'
-const numericRule = (value: number) => !isNaN(value) || 'Must be a number'
-const dollarRule = (value: string) =>
-  /^\$?\d+(\.\d{2})?$/.test(value) || 'Must be a valid dollar amount'
-const phoneRule = (value: string) =>
-  /^\(\d{3}\)\s?\d{3}-\d{4}$/.test(value) || 'Must be a valid US phone number: (xxx)xxx-xxxx'
-const emailRule = (value: string) => /.+@.+\..+/.test(value) || 'Must be a valid email address'
-const isoDatetimeRule = (value: string) =>
-  !isNaN(Date.parse(value)) || 'Must be a valid ISO datetime string'
+function namedRules(name, ruleFunctions) {
+  return ruleFunctions.map((f) => f(name))
+}
+const requiredRule = (name) => (value: string | number) => !!value || `${name} is required`
+const urlRule = (name) => (value: string) =>
+  !value || /^https?:\/\//.test(value) || `${name} must be a URL`
+const numericRule = (name) => (value: number) => !isNaN(value) || `${name} must be a number`
+const dollarRule = (name) => (value: string) =>
+  /^\$?\d+(\.\d{2})?$/.test(value) || `${name} must be a valid dollar amount`
+const phoneRule = (name) => (value: string) =>
+  /^\(\d{3}\)\s?\d{3}-\d{4}$/.test(value) ||
+  `${name} must be a valid US phone number: (xxx)xxx-xxxx`
+const emailRule = (name) => (value: string) =>
+  /.+@.+\..+/.test(value) ||
+  `${name} must be a valid
+email address`
+const isoDatetimeRule = (name) => (value: string) =>
+  !isNaN(Date.parse(value)) || `${name} must be a valid ISO datetime string`
 </script>
 <template>
   <v-form ref="form" v-model="valid">
@@ -73,19 +81,19 @@ const isoDatetimeRule = (value: string) =>
           v-model="formData.images.header1"
           label="Header Image URL 1"
           density="compact"
-          :rules="[urlRule]"
+          :rules="namedRules('Header image URL 1', [urlRule])"
         ></v-text-field>
         <v-text-field
           v-model="formData.images.header2"
           label="Header Image URL 2"
           density="compact"
-          :rules="[urlRule]"
+          :rules="namedRules('Header image URL 2', [urlRule])"
         ></v-text-field>
         <v-text-field
           v-model="formData.images.header3"
           label="Header Image URL 2"
           density="compact"
-          :rules="[urlRule]"
+          :rules="namedRules('Header image URL 3', [urlRule])"
         ></v-text-field>
       </v-card-text>
     </v-card>
@@ -97,7 +105,7 @@ const isoDatetimeRule = (value: string) =>
           v-model="formData.dueDate"
           label="Due date"
           type="date"
-          :rules="[requiredRule, isoDatetimeRule]"
+          :rules="namedRules('Due date', [requiredRule, isoDatetimeRule])"
           density="compact"
         ></v-text-field>
       </v-card-text>
@@ -110,38 +118,38 @@ const isoDatetimeRule = (value: string) =>
         <v-text-field
           v-model="formData.camp.name"
           label="Camp Name"
-          :rules="[requiredRule]"
+          :rules="namedRules('Camp name', [requiredRule])"
           density="compact"
         ></v-text-field>
         <v-text-field
           v-model="formData.camp.url"
           label="Camp URL"
-          :rules="[requiredRule, urlRule]"
+          :rules="namedRules('Camp URL', [requiredRule, urlRule])"
           density="compact"
         ></v-text-field>
         <v-text-field
           v-model="formData.camp.phone"
           label="Camp Phone"
-          :rules="[requiredRule, phoneRule]"
+          :rules="namedRules('Camp Phone', [requiredRule, phoneRule])"
           density="compact"
         ></v-text-field>
         <v-text-field
           v-model="formData.camp.address"
           label="Camp Address"
-          :rules="[requiredRule]"
+          :rules="namedRules('Camp Address', [requiredRule])"
           density="compact"
         ></v-text-field>
         <v-text-field
           v-model="formData.camp.site"
           label="Camp Site"
-          :rules="[requiredRule]"
+          :rules="namedRules('Camp Site', [requiredRule])"
           density="compact"
         ></v-text-field>
         <v-select
           v-model="formData.camp.type"
           label="Camp Type"
           :items="['tent camping', 'cabin camping']"
-          :rules="[requiredRule]"
+          :rules="namedRules('Camp Type', [requiredRule])"
           density="compact"
         ></v-select>
         <v-switch v-model="formData.camp.messkits" label="Messkits Required"></v-switch>
@@ -160,13 +168,13 @@ const isoDatetimeRule = (value: string) =>
         <v-text-field
           v-model="formData.cost.scout"
           label="Scout Cost"
-          :rules="[requiredRule, dollarRule]"
+          :rules="namedRules('Scout Cost', [requiredRule, dollarRule])"
           density="compact"
         ></v-text-field>
         <v-text-field
           v-model="formData.cost.adult"
           label="Adult Cost"
-          :rules="[requiredRule, dollarRule]"
+          :rules="namedRules('Adult Cost', [requiredRule, dollarRule])"
           density="compact"
         ></v-text-field>
       </v-card-text>
@@ -179,14 +187,14 @@ const isoDatetimeRule = (value: string) =>
         <v-text-field
           v-model="formData.departure.location"
           label="Departure Location"
-          :rules="[requiredRule]"
+          :rules="namedRules('Departure Location', [requiredRule])"
           density="compact"
         ></v-text-field>
         <v-text-field
           v-model="formData.departure.time"
           label="Departure Time"
           type="datetime-local"
-          :rules="[requiredRule, isoDatetimeRule]"
+          :rules="namedRules('Departure Time', [requiredRule, isoDatetimeRule])"
           density="compact"
         ></v-text-field>
       </v-card-text>
@@ -199,14 +207,14 @@ const isoDatetimeRule = (value: string) =>
         <v-text-field
           v-model="formData.return.location"
           label="Return Location"
-          :rules="[requiredRule]"
+          :rules="namedRules('Return Location', [requiredRule])"
           density="compact"
         ></v-text-field>
         <v-text-field
           v-model="formData.return.time"
           label="Return Time"
           type="datetime-local"
-          :rules="[requiredRule, isoDatetimeRule]"
+          :rules="namedRules('Return Time', [requiredRule, isoDatetimeRule])"
           density="compact"
         ></v-text-field>
       </v-card-text>
@@ -219,7 +227,7 @@ const isoDatetimeRule = (value: string) =>
         <v-text-field
           v-model="formData.troop.number"
           label="Troop Number"
-          :rules="[requiredRule, numericRule]"
+          :rules="namedRules('Troop Number', [requiredRule, numericRule])"
           density="compact"
         ></v-text-field>
       </v-card-text>
@@ -232,25 +240,25 @@ const isoDatetimeRule = (value: string) =>
         <v-text-field
           v-model="formData.coordinator.name"
           label="Coordinator Name"
-          :rules="[requiredRule]"
+          :rules="namedRules('Coordinator Name', [requiredRule])"
           density="compact"
         ></v-text-field>
         <v-text-field
           v-model="formData.coordinator.address"
           label="Coordinator Address"
-          :rules="[requiredRule]"
+          :rules="namedRules('Coordinator Address', [requiredRule])"
           density="compact"
         ></v-text-field>
         <v-text-field
           v-model="formData.coordinator.phone"
           label="Coordinator Phone"
-          :rules="[requiredRule, phoneRule]"
+          :rules="namedRules('Coordinator Phone', [requiredRule, phoneRule])"
           density="compact"
         ></v-text-field>
         <v-text-field
           v-model="formData.coordinator.email"
           label="Coordinator Email"
-          :rules="[requiredRule, emailRule]"
+          :rules="namedRules('Coordinator Email', [requiredRule, emailRule])"
           density="compact"
         ></v-text-field>
       </v-card-text>

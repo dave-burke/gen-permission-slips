@@ -2,6 +2,7 @@
 import { useDisplay } from 'vuetify'
 import { ref, computed, useTemplateRef } from 'vue'
 import PermissionSlipForm from '@/components/PermissionSlipForm.vue'
+import ShareContent from '@/components/ShareContent.vue'
 import { ofetch } from 'ofetch'
 import { useLocalStorage, watchDebounced } from '@vueuse/core'
 
@@ -38,15 +39,6 @@ watchDebounced(
   },
   { debounce: 500, maxWait: 5_000, deep: true, immediate: true },
 )
-
-const canShare = navigator.canShare?.()
-
-function handleShare() {
-  navigator.share({
-    title: `JSON data for ${formData.camp.name} ${formData.departure.time}`,
-    text: formData.value,
-  })
-}
 </script>
 
 <template>
@@ -63,9 +55,7 @@ function handleShare() {
             v-model:data="formData"
             ref="form"
           ></PermissionSlipForm>
-          <v-btn v-if="canShare" color="primary" class="mt-4" @click="handleShare"
-            >Share form data</v-btn
-          >
+          <ShareContent :title="`JSON data for ${formData.camp.name}`" :text="formData" />
         </v-tabs-window-item>
         <v-tabs-window-item value="pdf">
           <template v-if="pdfSrc">
@@ -96,14 +86,7 @@ function handleShare() {
     <v-row>
       <v-col>
         <PermissionSlipForm v-model:valid="valid" v-model:data="formData"></PermissionSlipForm>
-        <v-btn v-if="canShare" color="primary" class="mt-4" @click="handleShare"
-          >Share form data</v-btn
-        >
-        <details v-else>
-          <summary>Click to show the raw data</summary>
-          <p>You can copy and paste the following and share it via email:</p>
-          <code>{{ formData }}</code>
-        </details>
+        <ShareContent :title="`JSON data for ${formData.camp.name}`" :text="formData" />
       </v-col>
       <v-col v-if="pdfSrc">
         <iframe :src="pdfSrc" width="100%" height="750px" />

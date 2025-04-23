@@ -24,7 +24,7 @@ watchDebounced(
       return
     }
     try {
-      const blob = await ofetch('/api/pdf', {
+      const blob = await ofetch(`${import.meta.env.VITE_API_URL}/pdf`, {
         method: 'POST',
         body: formData.value,
         responseType: 'blob',

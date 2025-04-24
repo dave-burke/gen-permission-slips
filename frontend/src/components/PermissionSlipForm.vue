@@ -1,74 +1,47 @@
 <script setup lang="ts">
-import { computed, useTemplateRef, onBeforeMount } from 'vue'
+import type { PermissionSlipData } from './permission-slip-form.types'
+import type { PropType } from 'vue'
 import merge from 'lodash/merge'
+import { VForm } from 'vuetify/components'
+import { computed, useTemplateRef, onBeforeMount } from 'vue'
+import { defaultFormData } from './default-form-data'
 
-const formData = defineModel('data', { type: Object, default: {} })
+const formData = defineModel('data', {
+  type: Object as PropType<PermissionSlipData>,
+  default: () => structuredClone(defaultFormData),
+})
 onBeforeMount(() => {
-  const defaultData = {
-    images: {
-      header1: '',
-      header2: '',
-      header3: '',
-    },
-    dueDate: '',
-    camp: {
-      name: '',
-      url: '',
-      phone: '',
-      address: '',
-      site: '',
-      type: 'tent camping',
-      messkits: true,
-      map: '',
-    },
-    cost: {
-      scout: '',
-      adult: '',
-    },
-    departure: {
-      location: '',
-      time: '',
-    },
-    return: {
-      location: '',
-      time: '',
-    },
-    troop: {
-      number: '',
-    },
-    coordinator: {
-      name: '',
-      address: '',
-      phone: '',
-      email: '',
-    },
-  }
-  formData.value = merge(defaultData, formData.value)
+  const copy: PermissionSlipData = JSON.parse(JSON.stringify(defaultFormData))
+  formData.value = merge(copy, formData.value)
 })
 
 const valid = defineModel('valid', { type: Boolean, default: false })
-const form = useTemplateRef('form')
+const form = useTemplateRef<VForm>('form')
 const errors = computed(() => form.value?.errors ?? [])
 defineExpose({ errors })
 
 // Validation Rules
-function namedRules(name, ruleFunctions) {
+function namedRules<T>(
+  name: string,
+  ruleFunctions: Array<(name: string) => (value: T) => boolean | string>,
+): ((value: T) => boolean | string)[] {
   return ruleFunctions.map((f) => f(name))
 }
-const requiredRule = (name) => (value: string | number) => !!value || `${name} is required`
-const urlRule = (name) => (value: string) =>
+
+const requiredRule = (name: string) => (value: string | number) => !!value || `${name} is required`
+const urlRule = (name: string) => (value: string) =>
   !value || /^https?:\/\//.test(value) || `${name} must be a URL`
-const numericRule = (name) => (value: number) => !isNaN(value) || `${name} must be a number`
-const dollarRule = (name) => (value: string) =>
+const numericRule = (name: string) => (value: number) => !isNaN(value) || `${name} must be a number`
+const dollarRule = (name: string) => (value: string) =>
   /^\$?\d+(\.\d{2})?$/.test(value) || `${name} must be a valid dollar amount`
-const phoneRule = (name) => (value: string) =>
+const phoneRule = (name: string) => (value: string) =>
   /^\(\d{3}\)\s?\d{3}-\d{4}$/.test(value) ||
   `${name} must be a valid US phone number: (xxx)xxx-xxxx`
-const emailRule = (name) => (value: string) =>
+const emailRule = (name: string) => (value: string) =>
   /.+@.+\..+/.test(value) ||
   `${name} must be a valid
 email address`
-const isoDatetimeRule = (name) => (value: string) =>
+const isoDatetimeRule = (name: string) => (value: string) =>
   !isNaN(Date.parse(value)) || `${name} must be a valid ISO datetime string`
 </script>
 <template>

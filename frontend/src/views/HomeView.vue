@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { PermissionSlipData } from '@/components/permission-slip-form.types.ts'
 import { useDisplay } from 'vuetify'
 import { ref, computed, useTemplateRef } from 'vue'
+import type { Ref } from 'vue'
 import PermissionSlipForm from '@/components/PermissionSlipForm.vue'
 import ShareContent from '@/components/ShareContent.vue'
 import { ofetch } from 'ofetch'
@@ -10,8 +12,8 @@ const tab = ref(null)
 const { smAndDown } = useDisplay()
 
 const valid = ref(false)
-const formData = useLocalStorage('form-data', {})
-const form = useTemplateRef('form')
+const formData = useLocalStorage('form-data', {} as Ref<PermissionSlipData>)
+const form = useTemplateRef<typeof PermissionSlipForm>('form')
 const errors = computed(() => form.value?.errors ?? [])
 const pdfSrc = ref<string | null>(null)
 

@@ -73,8 +73,9 @@ watchDebounced(
             </v-btn>
           </template>
           <template v-else>
-            No PDF data. Is the form filled out fully and correctly?
-            <ul>
+            No PDF data.
+            <span v-if="errors?.length > 0">Please check the following validation issues:</span>
+            <ul class="text-red mt-2">
               <li v-for="error in errors" :key="error.id">
                 {{ error.errorMessages.join(", '") }}
               </li>
@@ -105,3 +106,9 @@ watchDebounced(
     </v-row>
   </v-container>
 </template>
+<style>
+ul {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+</style>

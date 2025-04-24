@@ -11,8 +11,12 @@ const formData = defineModel('data', {
   default: () => structuredClone(defaultFormData),
 })
 onBeforeMount(() => {
-  const copy: PermissionSlipData = JSON.parse(JSON.stringify(defaultFormData))
-  formData.value = merge(copy, formData.value)
+  const copy: PermissionSlipData = structuredClone(defaultFormData)
+  // If we re-assign formData.value the change doesn't get propagated until the next tick (and the
+  // form has rendering errors for missing props if the parent didn't pass them). By mutating
+  // formData.value in-place, the merged values are available immediately.
+  const merged = merge(copy, formData.value)
+  merge(formData.value, merged)
 })
 
 const valid = defineModel('valid', { type: Boolean, default: false })

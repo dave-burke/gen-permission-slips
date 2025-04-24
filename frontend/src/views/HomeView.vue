@@ -57,7 +57,7 @@ watchDebounced(
             v-model:data="formData"
             ref="form"
           ></PermissionSlipForm>
-          <ShareContent :title="`JSON data for ${formData.camp.name}`" :text="formData" />
+          <ShareContent :title="`JSON data for ${formData.camp?.name}`" :text="formData" />
         </v-tabs-window-item>
         <v-tabs-window-item value="pdf">
           <template v-if="pdfSrc">
@@ -88,7 +88,7 @@ watchDebounced(
     <v-row>
       <v-col>
         <PermissionSlipForm v-model:valid="valid" v-model:data="formData"></PermissionSlipForm>
-        <ShareContent :title="`JSON data for ${formData.camp.name}`" :text="formData" />
+        <ShareContent :title="`JSON data for ${formData.camp?.name}`" :text="formData" />
       </v-col>
       <v-col v-if="pdfSrc">
         <iframe :src="pdfSrc" width="100%" height="750px" />
